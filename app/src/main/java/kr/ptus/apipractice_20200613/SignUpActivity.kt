@@ -28,12 +28,15 @@ class SignUpActivity : BaseActivity() {
                 inputEmail,
                 object : ServerUtil.JsonResponseHandler {
                     override fun onResponse(json: JSONObject) {
-
-
-
+                        val code = json.getInt("code")
+                        runOnUiThread {
+                            if (code == 200) {
+                                emailCheckResultTxt.text = "사용해도 좋습니다."
+                            } else {
+                                emailCheckResultTxt.text = "이미 사용중입니다. 다른이메일로 다시 체크해주세요."
+                            }
+                        }
                     }
-
-
                 })
 
         }
