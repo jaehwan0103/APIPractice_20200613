@@ -42,13 +42,16 @@ class LoginActivity : BaseActivity() {
 
                         if (codeNum == 200) {
 
-                            val data = json.getJSONObject("data")
-                            val user = data.getJSONObject("user")
-                            val loginUserEmail = user.getString("email")
+                            val myIntent = Intent(mContext , MainActivity::class.java)
+                            startActivity(myIntent)
 
-                            runOnUiThread{
-                            Toast.makeText(mContext, loginUserEmail, Toast.LENGTH_SHORT).show()
-                            }
+//                            val data = json.getJSONObject("data")
+//                            val user = data.getJSONObject("user")
+//                            val loginUserEmail = user.getString("email")
+//
+//                            runOnUiThread{
+//                            Toast.makeText(mContext, loginUserEmail, Toast.LENGTH_SHORT).show()
+//                            }
 
 
                         }
