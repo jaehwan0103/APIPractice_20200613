@@ -38,10 +38,25 @@ class SignUpActivity : BaseActivity() {
             }
 
             val email = emailEdt.text.toString()
-            val pw = pwEdt.text.toString()
+            val pw = passwordEdt.text.toString()
             val nickName = nickNameTxt.text.toString()
 
+            ServerUtil.putRequestSignUp(mContext,email,pw,nickName,object :ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
 
+                    val code = json.getInt("code")
+
+                    if (code == 200 ){
+
+                    }
+                    else{
+                        val message = json.getString("message")
+                        Toast.makeText(mContext , message , Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
+            })
 
 
         }

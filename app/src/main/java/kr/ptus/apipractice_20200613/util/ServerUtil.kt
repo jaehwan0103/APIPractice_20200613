@@ -13,11 +13,7 @@ class ServerUtil {
     companion object {
         val BASE_URL = "http://15.165.177.142"
 
-        fun getRequestDuplicatedCheck(
-            context: Context,
-            checkType: String,
-            inputVal: String,
-            handler: JsonResponseHandler?
+        fun getRequestDuplicatedCheck(context: Context,checkType: String,inputVal: String,handler: JsonResponseHandler?
         ) {
 
             val client = OkHttpClient()
@@ -45,7 +41,7 @@ class ServerUtil {
                     val bodyString = response.body!!.string()
 
                     val josn = JSONObject(bodyString)
-                    Log.d("제이슨 응답", josn.toString())
+                    Log.d("JSON 응답", josn.toString())
                     handler?.onResponse(josn)
 
                 }
@@ -53,11 +49,7 @@ class ServerUtil {
             })
         }
 
-        fun postRequestLogin(
-            context: Context,
-            id: String,
-            pw: String,
-            handler: JsonResponseHandler?
+        fun postRequestLogin(context: Context,id: String,pw: String,handler: JsonResponseHandler?
         ) {
             val client = OkHttpClient()
             val urlString = "${BASE_URL}/user"
@@ -80,7 +72,41 @@ class ServerUtil {
                     val bodyString = response.body!!.string()
 
                     val josn = JSONObject(bodyString)
-                    Log.d("제이슨 응답", josn.toString())
+                    Log.d("JSON 응답", josn.toString())
+                    handler?.onResponse(josn)
+
+                }
+
+            })
+
+        }
+
+        fun putRequestSignUp(
+            context: Context, email: String, pw: String, nick: String, handler: JsonResponseHandler?
+        ) {
+            val client = OkHttpClient()
+            val urlString = "${BASE_URL}/user"
+            val formData = FormBody.Builder()
+                .add("email", email)
+                .add("password", pw)
+                .add("nick_name", nick)
+                .build()
+
+            val request = Request.Builder().url(urlString).post(formData)/*.header()*/.build()
+
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    val bodyString = response.body!!.string()
+
+                    val josn = JSONObject(bodyString)
+                    Log.d("JSON 응답", josn.toString())
                     handler?.onResponse(josn)
 
                 }
