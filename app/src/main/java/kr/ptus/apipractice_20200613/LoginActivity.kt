@@ -34,15 +34,19 @@ class LoginActivity : BaseActivity() {
                         val codeNum = json.getInt("code")
 
                         if (codeNum == 200) {
+
                             val data = json.getJSONObject("data")
                             val user = data.getJSONObject("user")
-                            val loginUserNickName = user.getString("nick_name")
+                            val loginUserEmail = user.getString("email")
 
                             runOnUiThread{
-                                Toast.makeText(mContext , "${loginUserNickName}님 환영합니다.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, loginUserEmail, Toast.LENGTH_SHORT).show()
                             }
 
-                        } else {
+
+                        }
+
+                        else {
                             val message = json.getString("message")
                             runOnUiThread {
                                 Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
