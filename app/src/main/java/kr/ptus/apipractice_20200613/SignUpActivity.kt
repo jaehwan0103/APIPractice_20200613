@@ -21,6 +21,8 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        signupBtn.setOnClickListener {  }
+
         nickNameTxt.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {
             }
