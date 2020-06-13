@@ -92,7 +92,7 @@ class ServerUtil {
                 .add("nick_name", nick)
                 .build()
 
-            val request = Request.Builder().url(urlString).post(formData)/*.header()*/.build()
+            val request = Request.Builder().url(urlString).put(formData)/*.header()*/.build()
 
 
             client.newCall(request).enqueue(object : Callback {
