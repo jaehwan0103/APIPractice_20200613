@@ -5,12 +5,17 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_sign_up.emailEdt
 import kr.ptus.apipractice_20200613.util.ServerUtil
 import org.json.JSONObject
 
 class SignUpActivity : BaseActivity() {
 
+    var isEmailDuplOk = false
+    var isNickNameDuplOk = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +26,25 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
-        signupBtn.setOnClickListener {  }
+        signupBtn.setOnClickListener {
+
+            if (!isEmailDuplOk){
+                Toast.makeText(mContext, "이메일 중복검사를 통과해야합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if(!isNickNameDuplOk){
+                Toast.makeText(mContext, "닉네임 중복검사를 통과해야합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val email = emailEdt.text.toString()
+            val pw = pwEdt.text.toString()
+            val nickName = nickNameTxt.text.toString()
+
+
+
+
+        }
 
         nickNameTxt.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {
@@ -32,6 +55,7 @@ class SignUpActivity : BaseActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 nickNameResultTxt.text = "중복확인을 해주세요."
+                isNickNameDuplOk = false
             }
 
 
@@ -49,6 +73,7 @@ class SignUpActivity : BaseActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 //                Log.d("변경된내용",s.toString())
                 emailCheckResultTxt.text = "중복확인을 해주세요."
+                isEmailDuplOk = false
 
             }
 
@@ -69,6 +94,7 @@ class SignUpActivity : BaseActivity() {
                         runOnUiThread() {
                             if (code == 200) {
                                 nickNameResultTxt.text = "사용해도 좋습니다."
+                                isNickNameDuplOk = true
                             } else {
                                 nickNameResultTxt.text = "중복된 닉네임입니다."
                             }
@@ -91,6 +117,7 @@ class SignUpActivity : BaseActivity() {
                         runOnUiThread {
                             if (code == 200) {
                                 emailCheckResultTxt.text = "사용해도 좋습니다."
+                                isEmailDuplOk = true // 중복 검사 결과를 true로 변경
                             } else {
                                 emailCheckResultTxt.text = "이미 사용중입니다. 다른이메일로 다시 체크해주세요."
                             }
