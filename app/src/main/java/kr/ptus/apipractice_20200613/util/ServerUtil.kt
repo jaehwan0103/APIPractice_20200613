@@ -7,13 +7,18 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.json.JSONObject
 import java.io.IOException
 
-class ServerUtil  {
+class ServerUtil {
 
 
-    companion object{
-         val BASE_URL = "http://15.165.177.142"
+    companion object {
+        val BASE_URL = "http://15.165.177.142"
 
-        fun getRequestDuplicatedCheck(context: Context, checkType : String, inputVal : String , handler: JsonResponseHandler?){
+        fun getRequestDuplicatedCheck(
+            context: Context,
+            checkType: String,
+            inputVal: String,
+            handler: JsonResponseHandler?
+        ) {
 
             val client = OkHttpClient()
 
@@ -21,8 +26,8 @@ class ServerUtil  {
 
             val urlBuilder = "${BASE_URL}/user_check".toHttpUrlOrNull()!!.newBuilder()
 
-            urlBuilder.addEncodedQueryParameter("type" , checkType)
-            urlBuilder.addEncodedQueryParameter("value",inputVal)
+            urlBuilder.addEncodedQueryParameter("type", checkType)
+            urlBuilder.addEncodedQueryParameter("value", inputVal)
 
             val urlString = urlBuilder.build().toString()
             Log.d("완성된 주소", urlString)
@@ -31,7 +36,6 @@ class ServerUtil  {
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-
 
 
                 }
@@ -49,7 +53,12 @@ class ServerUtil  {
             })
         }
 
-        fun postRequestLogin(context: Context , id : String , pw : String , handler : JsonResponseHandler?){
+        fun postRequestLogin(
+            context: Context,
+            id: String,
+            pw: String,
+            handler: JsonResponseHandler?
+        ) {
             val client = OkHttpClient()
             val urlString = "${BASE_URL}/user"
             val formData = FormBody.Builder()
@@ -62,7 +71,6 @@ class ServerUtil  {
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-
 
 
                 }
