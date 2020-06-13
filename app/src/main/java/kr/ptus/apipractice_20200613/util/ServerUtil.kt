@@ -1,6 +1,7 @@
 package kr.ptus.apipractice_20200613.util
 
 import android.content.Context
+import android.util.Log
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -33,7 +34,7 @@ class ServerUtil  {
                     val bodyString = response.body!!.string()
 
                     val josn = JSONObject(bodyString)
-
+                    Log.d("제이슨 응답", josn.toString())
                     handler?.onResponse(josn)
 
                 }

@@ -2,6 +2,7 @@ package kr.ptus.apipractice_20200613
 
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_login.*
+import kr.ptus.apipractice_20200613.util.ServerUtil
 
 class LoginActivity : BaseActivity() {
 
@@ -19,7 +20,7 @@ class LoginActivity : BaseActivity() {
             val inputEmail = emailEdt.text.toString()
             val inputPw = pwEdt.text.toString()
 
-
+            ServerUtil.postRequestLogin(mContext,inputEmail,inputPw,null)
 
         }
 
