@@ -2,6 +2,9 @@ package kr.ptus.apipractice_20200613
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kr.ptus.apipractice_20200613.util.ServerUtil
 import org.json.JSONObject
@@ -17,6 +20,37 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        nickNameTxt.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                nickNameResultTxt.text = "중복확인을 해주세요."
+            }
+
+
+        })
+
+        emailEdt.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                Log.d("변경된내용",s.toString())
+                emailCheckResultTxt.text = "중복확인을 해주세요."
+
+            }
+
+        })
 
         nickNameBtn.setOnClickListener {
 
@@ -37,15 +71,9 @@ class SignUpActivity : BaseActivity() {
                                 nickNameResultTxt.text = "중복된 닉네임입니다."
                             }
                         }
-
                     }
-
-
                 })
-
-
         }
-
 
         emailCheckBtn.setOnClickListener {
 
