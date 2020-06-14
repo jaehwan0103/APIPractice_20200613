@@ -103,7 +103,12 @@ class MainActivity : BaseActivity() {
 
                     }
 
-                    topicAdapter.notifyDataSetChanged()
+                    runOnUiThread{
+
+                        topicAdapter.notifyDataSetChanged()
+
+                    }
+
 
                 }
 

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import kr.ptus.apipractice_20200613.util.ServerUtil
+import org.json.JSONObject
 
 class ViewTopicDetailActivity : BaseActivity() {
 
@@ -33,6 +35,16 @@ class ViewTopicDetailActivity : BaseActivity() {
         }
 
         Log.d("넘겨받은 주제 id", mTopicId.toString())
+
+        ServerUtil.getRequestTopicDetail(mContext, mTopicId,object : ServerUtil.JsonResponseHandler{
+            override fun onResponse(json: JSONObject) {
+
+
+
+            }
+
+
+        })
 
     }
 }
