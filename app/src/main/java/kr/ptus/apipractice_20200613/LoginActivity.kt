@@ -21,7 +21,7 @@ class LoginActivity : BaseActivity() {
     override fun setupEvents() {
 
         signUp.setOnClickListener {
-            val myIntent = Intent(mContext,SignUpActivity::class.java)
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
             startActivity(myIntent)
         }
 
@@ -41,8 +41,10 @@ class LoginActivity : BaseActivity() {
                         val codeNum = json.getInt("code")
 
                         if (codeNum == 200) {
-
-                            val myIntent = Intent(mContext , MainActivity::class.java)
+                            
+//                            서버에서 내려주는 토큰값을 sharedPrefence에 저장
+                            
+                            val myIntent = Intent(mContext, MainActivity::class.java)
                             startActivity(myIntent)
 
 //                            val data = json.getJSONObject("data")
@@ -54,9 +56,7 @@ class LoginActivity : BaseActivity() {
 //                            }
 
 
-                        }
-
-                        else {
+                        } else {
                             val message = json.getString("message")
                             runOnUiThread {
                                 Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
