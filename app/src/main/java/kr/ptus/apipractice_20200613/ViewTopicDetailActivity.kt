@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_view_topic_detail.*
+import kr.ptus.apipractice_20200613.data.Topic
 import kr.ptus.apipractice_20200613.util.ServerUtil
 import org.json.JSONObject
 
 class ViewTopicDetailActivity : BaseActivity() {
 
     var mTopicId = -1
+
+    lateinit var mTopic : Topic
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +43,20 @@ class ViewTopicDetailActivity : BaseActivity() {
         ServerUtil.getRequestTopicDetail(mContext, mTopicId,object : ServerUtil.JsonResponseHandler{
             override fun onResponse(json: JSONObject) {
 
+                val code = json.getInt("code")
 
+                if (code == 200){
+
+                    val data = json.getJSONObject("data")
+                    val topic = data.getJSONObject("topic")
+
+                    mTopic = Topic.getTopicFromJson(topic)
+
+//                    받아온 주제의 제목을 화면에 표시
+                    runOnUiThread{
+                    topicTitleTxt.text = mTopic.title
+                    }
+                }
 
             }
 
