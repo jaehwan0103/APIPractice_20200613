@@ -26,6 +26,14 @@ class Topic {
 
             }
 
+            val replies = json.getJSONArray("replies")
+
+            for (i in 0..replies.length() - 1) {
+                val repltJson = replies.getJSONObject(i)
+                val reply = TopicReply.getTopicReplyFromJson(repltJson)
+                topic.replies.add(reply)
+            }
+
             return topic
         }
 
@@ -35,5 +43,7 @@ class Topic {
     var title = ""
     var imageUrl = ""
     val sides = ArrayList<TopicSide>()
+
+    val replies = ArrayList<TopicReply>()
 
 }
