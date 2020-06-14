@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
+import kr.ptus.apipractice_20200613.util.ContextUtil
 import kr.ptus.apipractice_20200613.util.ServerUtil
 import org.json.JSONObject
 
@@ -43,7 +44,12 @@ class LoginActivity : BaseActivity() {
                         if (codeNum == 200) {
                             
 //                            서버에서 내려주는 토큰값을 sharedPrefence에 저장
-                            
+                            val data = json.getJSONObject("data")
+                            val token = data.getString("token")
+
+
+                            ContextUtil.setuserToken(mContext, token)
+
                             val myIntent = Intent(mContext, MainActivity::class.java)
                             startActivity(myIntent)
 
