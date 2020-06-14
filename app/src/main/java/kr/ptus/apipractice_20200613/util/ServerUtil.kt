@@ -155,6 +155,40 @@ class ServerUtil {
             })
         }
 
+        fun getRequestV2Mainifo(
+            context: Context, handler: JsonResponseHandler?
+        ) {
+
+            val client = OkHttpClient()
+
+//            GET방식은 어디로 갈지 주소 + 어떤 데이터를 보낼지 같이 표시됨. 주소를 만들때 데이터 첨부까지 같이 진행.
+
+            val urlBuilder = "${BASE_URL}/v2/main_info".toHttpUrlOrNull()!!.newBuilder()
+
+            val urlString = urlBuilder.build().toString()
+            Log.d("완성된 주소", urlString)
+
+            val request = Request.Builder().url(urlString).get()
+                .header("X-Http-Token", ContextUtil.getUserToken(context)).build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    val bodyString = response.body!!.string()
+
+                    val josn = JSONObject(bodyString)
+                    Log.d("JSON 응답", josn.toString())
+                    handler?.onResponse(josn)
+
+                }
+
+            })
+        }
     }
 
     interface JsonResponseHandler {

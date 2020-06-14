@@ -12,6 +12,8 @@ import org.json.JSONObject
 
 class MainActivity : BaseActivity() {
 
+//    val  topiclist =
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,6 +22,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+
 
         logoutBtn.setOnClickListener {
             val alert = AlertDialog.Builder(mContext)
@@ -42,22 +46,36 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 
+        getTopicListFromServer()
 
-        ServerUtil.getRequestMyInfo(mContext, object : ServerUtil.JsonResponseHandler {
+//        ServerUtil.getRequestMyInfo(mContext, object : ServerUtil.JsonResponseHandler {
+//            override fun onResponse(json: JSONObject) {
+//
+//                val data = json.getJSONObject("data")
+//                val user = data.getJSONObject("user")
+//                val nickName = user.getString("nick_name")
+//
+//                runOnUiThread {
+//                    loginUserNickNameTxt.text = "${nickName}님 환영합니다."
+//                }
+//            }
+//
+//
+//        })
+
+
+    }
+
+    fun getTopicListFromServer(){
+
+        ServerUtil.getRequestV2Mainifo(mContext, object :  ServerUtil.JsonResponseHandler {
             override fun onResponse(json: JSONObject) {
 
-                val data = json.getJSONObject("data")
-                val user = data.getJSONObject("user")
-                val nickName = user.getString("nick_name")
 
-                runOnUiThread {
-                    loginUserNickNameTxt.text = "${nickName}님 환영합니다."
-                }
+
             }
 
-
         })
-
 
     }
 
