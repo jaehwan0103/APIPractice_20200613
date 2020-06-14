@@ -29,6 +29,16 @@ class MainActivity : BaseActivity() {
     override fun setupEvents() {
 
 
+        topicListView.setOnItemClickListener { parent, view, position, id ->
+
+            val clickedTopic = topiclist[position]
+
+            val myIntent = Intent(mContext, ViewTopicDetailActivity::class.java)
+            myIntent.putExtra("topic_id", clickedTopic.id)
+            startActivity(myIntent)
+
+        }
+
         logoutBtn.setOnClickListener {
             val alert = AlertDialog.Builder(mContext)
             alert.setTitle("로그아웃 확인")
@@ -53,7 +63,7 @@ class MainActivity : BaseActivity() {
         getTopicListFromServer()
 
         topicAdapter = TopicAdapter(mContext, R.layout.topic_list_item,topiclist)
-        topiclist
+        topicListView.adapter = topicAdapter
 
 //        ServerUtil.getRequestMyInfo(mContext, object : ServerUtil.JsonResponseHandler {
 //            override fun onResponse(json: JSONObject) {
