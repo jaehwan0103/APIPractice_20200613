@@ -6,14 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
+import kr.ptus.apipractice_20200613.adapter.TopicAdapter
 import kr.ptus.apipractice_20200613.data.Topic
 import kr.ptus.apipractice_20200613.util.ContextUtil
 import kr.ptus.apipractice_20200613.util.ServerUtil
 import org.json.JSONObject
+import java.util.ArrayList
 
 class MainActivity : BaseActivity() {
 
-//    val  topiclist =
+    val  topiclist = ArrayList<Topic>()
+
+    lateinit var topicAdapter : TopicAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +51,9 @@ class MainActivity : BaseActivity() {
     override fun setValues() {
 
         getTopicListFromServer()
+
+        topicAdapter = TopicAdapter(mContext, R.layout.topic_list_item,topiclist)
+        topiclist
 
 //        ServerUtil.getRequestMyInfo(mContext, object : ServerUtil.JsonResponseHandler {
 //            override fun onResponse(json: JSONObject) {
@@ -82,8 +89,11 @@ class MainActivity : BaseActivity() {
 
                         val topic = Topic.getTopicFromJson(topicJson)
 
+                        topiclist.add(topic)
 
                     }
+
+                    topicAdapter.notifyDataSetChanged()
 
                 }
 
