@@ -1,7 +1,9 @@
 package kr.ptus.apipractice_20200613
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 
 class SplashActivity :BaseActivity() {
 
@@ -20,6 +22,18 @@ class SplashActivity :BaseActivity() {
     }
 
     override fun setValues() {
+
+        val myHandler = Handler()
+        myHandler.postDelayed({
+
+            val myIntent = Intent(mContext, LoginActivity::class.java)
+            startActivity(myIntent)
+
+            finish()
+
+        }, 3000)
+
+
 
     }
 }
