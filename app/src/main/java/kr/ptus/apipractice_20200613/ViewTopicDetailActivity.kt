@@ -25,6 +25,46 @@ class ViewTopicDetailActivity : BaseActivity() {
     }
     override fun setupEvents() {
 
+        firstBtn.setOnClickListener {
+
+            ServerUtil.postRequestVote(mContext,mTopic.sides[0].id,object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+
+                }
+
+
+            })
+
+
+        }
+
+
+        secondBtn.setOnClickListener {
+            ServerUtil.postRequestVote(mContext,mTopic.sides[1].id,object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+
+                    val code = json.getInt("code")
+
+                    if (code == 200) {
+
+                        runOnUiThread {
+                            Toast.makeText(mContext, "참여해주셔서 감사합니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    else{
+                        val message = json.getString("message")
+                        runOnUiThread {
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                }
+
+
+            })
+
+
+        }
 
     }
 

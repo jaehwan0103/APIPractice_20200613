@@ -43,7 +43,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -68,11 +69,20 @@
                         android:textSize="20sp" />
 
                     <Button
+                        android:id="@+id/firstBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="선택"/>
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="VS"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -99,6 +109,7 @@
                         android:textSize="20sp" />
 
                     <Button
+                        android:id="@+id/secondBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="선택"/>
