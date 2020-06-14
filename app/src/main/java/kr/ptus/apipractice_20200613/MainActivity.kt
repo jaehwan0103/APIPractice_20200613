@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
+import kr.ptus.apipractice_20200613.data.Topic
 import kr.ptus.apipractice_20200613.util.ContextUtil
 import kr.ptus.apipractice_20200613.util.ServerUtil
 import org.json.JSONObject
@@ -76,8 +77,12 @@ class MainActivity : BaseActivity() {
                     val data = json.getJSONObject("data")
                     val topics = data.getJSONArray("topics")
 
-                    for (i in 0..topics.length()-1){
+                    for (i in 0..topics.length() - 1) {
                         val topicJson = topics.getJSONObject(i)
+
+                        val topic = Topic.getTopicFromJson(topicJson)
+
+
                     }
 
                 }
