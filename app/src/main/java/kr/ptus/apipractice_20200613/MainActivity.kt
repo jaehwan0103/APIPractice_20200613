@@ -24,21 +24,20 @@ class MainActivity : BaseActivity() {
     override fun setupEvents() {
 
 
-
         logoutBtn.setOnClickListener {
             val alert = AlertDialog.Builder(mContext)
             alert.setTitle("로그아웃 확인")
             alert.setMessage("정말 로그아웃 하시겠습니까?")
             alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
-                ContextUtil.setuserToken(mContext,"")
+                ContextUtil.setuserToken(mContext, "")
 
-                val myIntent = Intent(mContext , LoginActivity::class.java)
+                val myIntent = Intent(mContext, LoginActivity::class.java)
                 startActivity(myIntent)
 
                 finish()
 
             })
-            alert.setNegativeButton("취소",null)
+            alert.setNegativeButton("취소", null)
             alert.show()
         }
 
@@ -66,11 +65,22 @@ class MainActivity : BaseActivity() {
 
     }
 
-    fun getTopicListFromServer(){
+    fun getTopicListFromServer() {
 
-        ServerUtil.getRequestV2Mainifo(mContext, object :  ServerUtil.JsonResponseHandler {
+        ServerUtil.getRequestV2Mainifo(mContext, object : ServerUtil.JsonResponseHandler {
             override fun onResponse(json: JSONObject) {
 
+                val code = json.getInt("code")
+
+                if (code == 200) {
+                    val data = json.getJSONObject("data")
+                    val topics = data.getJSONArray("topics")
+
+                    for (i in 0..topics.length()-1){
+                        val topicJson = topics.getJSONObject(i)
+                    }
+
+                }
 
 
             }
