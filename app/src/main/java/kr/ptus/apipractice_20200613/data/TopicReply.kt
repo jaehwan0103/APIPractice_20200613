@@ -19,6 +19,12 @@ class TopicReply {
             val userJson = json.getJSONObject("user")
             tr.user = User.getuserFromJson(userJson)
 
+            tr.replyCount = json.getInt("reply_count")
+            tr.likeCount = json.getInt("like_count")
+            tr.disLikeCount = json.getInt("dislike_count")
+
+
+
             return tr
 
 
@@ -35,5 +41,8 @@ class TopicReply {
 
     lateinit var user : User
 
+    var replyCount = 0
+    var likeCount = 0
+    var disLikeCount = 0
 
 }
