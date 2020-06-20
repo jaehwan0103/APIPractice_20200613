@@ -63,7 +63,6 @@ class ViewTopicDetailActivity : BaseActivity() {
 
         }
 
-
         secondBtn.setOnClickListener {
             ServerUtil.postRequestVote(mContext,mTopic.sides[1].id,object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
@@ -94,6 +93,8 @@ class ViewTopicDetailActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+
 
         mTopicId = intent.getIntExtra("topic_id", -1)
 
