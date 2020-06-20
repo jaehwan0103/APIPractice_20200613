@@ -32,6 +32,7 @@ class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicR
 
         val data = mList[position]
 
+        writerNickNameTxt.text = data.user.nickName
         contentTxt.text = data.content
 
         return  row

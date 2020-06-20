@@ -16,7 +16,8 @@ class TopicReply {
             tr.sideId = json.getInt("side_id")
             tr.userId = json.getInt("user_id")
 
-
+            val userJson = json.getJSONObject("user")
+            tr.user = User.getuserFromJson(userJson)
 
             return tr
 
