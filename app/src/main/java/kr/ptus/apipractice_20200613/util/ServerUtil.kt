@@ -289,6 +289,38 @@ class ServerUtil {
 
         }
 
+        fun postRequestReplyLiek(
+            context: Context, replyId : Int , islike : Boolean , handler: JsonResponseHandler?
+        ) {
+            val client = OkHttpClient()
+            val urlString = "${BASE_URL}/topic_reply_like"
+            val formData = FormBody.Builder()
+                .add("reply_id", replyId.toString())
+                .add("is_like", islike.toString())
+                .build()
+
+            val request = Request.Builder().url(urlString).post(formData).header("X-Http-Token", ContextUtil.getUserToken(context)).build()
+
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    val bodyString = response.body!!.string()
+
+                    val josn = JSONObject(bodyString)
+                    Log.d("JSON 응답", josn.toString())
+                    handler?.onResponse(josn)
+
+                }
+
+            })
+
+        }
 
     }
 
