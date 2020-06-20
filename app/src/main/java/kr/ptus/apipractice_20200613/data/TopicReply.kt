@@ -19,6 +19,9 @@ class TopicReply {
             val userJson = json.getJSONObject("user")
             tr.user = User.getuserFromJson(userJson)
 
+            tr.selectedSide = TopicSide.getTopicSideFromJson(json.getJSONObject("selected_side"))
+
+
             tr.replyCount = json.getInt("reply_count")
             tr.likeCount = json.getInt("like_count")
             tr.disLikeCount = json.getInt("dislike_count")
@@ -26,6 +29,8 @@ class TopicReply {
 
             tr.isMyLike = json.getBoolean("my_like")
             tr.isMydisLike = json.getBoolean("my_dislike")
+
+
 
 
             return tr
@@ -43,6 +48,8 @@ class TopicReply {
     var userId = 0
 
     lateinit var user : User
+
+    lateinit var selectedSide : TopicSide
 
     var replyCount = 0
     var likeCount = 0

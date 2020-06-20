@@ -39,12 +39,16 @@ class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicR
         val replyBtn = row.findViewById<Button>(R.id.replyBtn)
         val likeBtn = row.findViewById<Button>(R.id.likeBtn)
         val dislikeBtn = row.findViewById<Button>(R.id.disLikeBtn)
+        val selectedSideTitleTxt = row.findViewById<TextView>(R.id.selectedSideTitleTxt)
 
 
         val data = mList[position]
 
         writerNickNameTxt.text = data.user.nickName
         contentTxt.text = data.content
+
+        selectedSideTitleTxt.text = "(${data.selectedSide.title})"
+
 
         replyBtn.text = "답글 : ${data.replyCount}"
         likeBtn.text = "좋아요 : ${data.likeCount}"
