@@ -84,7 +84,9 @@ class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicR
                         val reply = dataObj.getJSONObject("reply")
 
                         data.likeCount = reply.getInt("like_count")
-                        data.likeCount = reply.getInt("dislike_count")
+                        data.disLikeCount = reply.getInt("dislike_count")
+
+
 
                         Handler(Looper.getMainLooper()).post {
                             notifyDataSetChanged()
