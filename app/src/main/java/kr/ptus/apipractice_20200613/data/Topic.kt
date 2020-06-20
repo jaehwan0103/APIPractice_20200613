@@ -34,6 +34,11 @@ class Topic {
                 topic.replies.add(reply)
             }
 
+            topic.mySideId = json.getInt("my_side_id")
+
+            if (!json.isNull("my_side")) {
+                topic.mySelectedSide = TopicSide.getTopicSideFromJson(json.getJSONObject("my_side"))
+            }
             return topic
         }
 
@@ -45,5 +50,10 @@ class Topic {
     val sides = ArrayList<TopicSide>()
 
     val replies = ArrayList<TopicReply>()
+
+
+    var mySideId = -1
+
+    var mySelectedSide: TopicSide? = null
 
 }
