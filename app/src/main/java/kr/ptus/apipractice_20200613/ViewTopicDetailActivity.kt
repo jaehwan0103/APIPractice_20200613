@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
+import kr.ptus.apipractice_20200613.adapter.ReplyAdapter
 import kr.ptus.apipractice_20200613.data.Topic
 import kr.ptus.apipractice_20200613.util.ServerUtil
 import org.json.JSONObject
@@ -15,6 +16,8 @@ class ViewTopicDetailActivity : BaseActivity() {
     var mTopicId = -1
 
     lateinit var mTopic : Topic
+
+    lateinit var mReplyAdapter : ReplyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,6 +107,10 @@ class ViewTopicDetailActivity : BaseActivity() {
 
                         firstSideVoteCountTxt.text = "${mTopic.sides[0].votecount}표"
                         secondSideVoteCountTxt.text = "${mTopic.sides[1].votecount}표"
+
+                        mReplyAdapter = ReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.replies)
+                        replyListView.adapter = mReplyAdapter
+
                     }
                 }
 

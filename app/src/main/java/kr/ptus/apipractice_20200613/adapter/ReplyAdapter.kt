@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import kr.ptus.apipractice_20200613.R
 import kr.ptus.apipractice_20200613.data.TopicReply
+import org.w3c.dom.Text
 
 class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicReply>) :
     ArrayAdapter<TopicReply>(mContext, resId, mList) {
@@ -23,6 +25,14 @@ class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicR
         }
 
         val row = tempRow!!
+
+
+        val writerNickNameTxt = row.findViewById<TextView>(R.id.writerNickNameTxt)
+        val contentTxt = row.findViewById<TextView>(R.id.contentTxt)
+
+        val data = mList[position]
+
+        contentTxt.text = data.content
 
         return  row
 
