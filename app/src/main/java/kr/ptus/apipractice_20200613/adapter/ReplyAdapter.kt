@@ -78,7 +78,17 @@ class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicR
                 data.id,
                 false,
                 object : ServerUtil.JsonResponseHandler {
+
                     override fun onResponse(json: JSONObject) {
+                        val dataObj = json.getJSONObject("data")
+                        val reply = dataObj.getJSONObject("reply")
+
+                        data.likeCount = reply.getInt("like_count")
+                        data.likeCount = reply.getInt("dislike_count")
+
+                        Handler(Looper.getMainLooper()).post {
+                            notifyDataSetChanged()
+                        }
 
                     }
 
