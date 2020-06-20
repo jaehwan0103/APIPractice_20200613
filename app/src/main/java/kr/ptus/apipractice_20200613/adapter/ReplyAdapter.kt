@@ -1,5 +1,6 @@
 package kr.ptus.apipractice_20200613.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -20,6 +21,7 @@ class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicR
 
     val inf = LayoutInflater.from(mContext)
 
+    @SuppressLint("ResourceAsColor")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var tempRow = convertView
 
@@ -47,6 +49,29 @@ class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicR
         replyBtn.text = "답글 : ${data.replyCount}"
         likeBtn.text = "좋아요 : ${data.likeCount}"
         dislikeBtn.text = "싫어요 : ${data.disLikeCount}"
+
+        if (data.isMyLike){
+
+            likeBtn.setBackgroundResource(R.drawable.red_border_box)
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.red))
+            dislikeBtn.setBackgroundResource(R.drawable.gray_border_box)
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
+
+        }
+        else if (data.isMydisLike){
+            likeBtn.setBackgroundResource(R.drawable.gray_border_box)
+            dislikeBtn.setBackgroundResource(R.drawable.blue_border_box)
+
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.blue))
+        }
+        else{
+            likeBtn.setBackgroundResource(R.drawable.gray_border_box)
+            dislikeBtn.setBackgroundResource(R.drawable.gray_border_box)
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
+        }
+
 
         likeBtn.setOnClickListener {
 

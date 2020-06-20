@@ -24,6 +24,9 @@ class TopicReply {
             tr.disLikeCount = json.getInt("dislike_count")
 
 
+            tr.isMyLike = json.getBoolean("my_like")
+            tr.isMydisLike = json.getBoolean("my_dislike")
+
 
             return tr
 
@@ -44,5 +47,9 @@ class TopicReply {
     var replyCount = 0
     var likeCount = 0
     var disLikeCount = 0
+
+    var isMyLike = false
+    var isMydisLike = false
+
 
 }
