@@ -57,6 +57,7 @@ class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicR
             dislikeBtn.setBackgroundResource(R.drawable.gray_border_box)
             dislikeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
 
+
         }
         else if (data.isMydisLike){
             likeBtn.setBackgroundResource(R.drawable.gray_border_box)
@@ -64,6 +65,8 @@ class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicR
 
             likeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
             dislikeBtn.setTextColor(mContext.resources.getColor(R.color.blue))
+
+
         }
         else{
             likeBtn.setBackgroundResource(R.drawable.gray_border_box)
@@ -89,6 +92,9 @@ class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicR
                         data.likeCount = reply.getInt("like_count")
                         data.likeCount = reply.getInt("dislike_count")
 
+                        data.isMyLike = reply.getBoolean("my_like")
+                        data.isMydisLike = reply.getBoolean("my_dislike")
+
                         Handler(Looper.getMainLooper()).post {
                             notifyDataSetChanged()
                         }
@@ -111,7 +117,8 @@ class ReplyAdapter(val mContext: Context, val resId: Int, val mList: List<TopicR
                         data.likeCount = reply.getInt("like_count")
                         data.disLikeCount = reply.getInt("dislike_count")
 
-
+                        data.isMyLike = reply.getBoolean("my_like")
+                        data.isMydisLike = reply.getBoolean("my_dislike")
 
                         Handler(Looper.getMainLooper()).post {
                             notifyDataSetChanged()
