@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.ptus.apipractice_20200613" >
+    package="kr.ptus.apipractice_20200613">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,13 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true" >
-        <activity android:name=".EditReplyActivity" >
-        </activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ViewReplyDetailActivity"></activity>
+        <activity android:name=".EditReplyActivity"></activity>
         <activity android:name=".ViewTopicDetailActivity" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
